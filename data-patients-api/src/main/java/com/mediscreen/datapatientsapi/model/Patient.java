@@ -3,18 +3,17 @@ package com.mediscreen.datapatientsapi.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 
 @Entity
 @Data
-public class Patient {
+public class Patient implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    //@Column(name = "patientId")
     private Long patientId;
 
     private String firstName;
