@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Mediscreen</title>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.1.2/css/bootstrap.min.css" />
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Application Mediscreen</h1>
+
+    <div class="row">
+
+        <div th:each="patient : ${patientsList}" class="col-md-4 my-1">
+            <a th:href="@{|/patient/${patient.getPatientId()}|}" >
+                <p th:text= "${patient.getFirstName()}"></p>
+                <p th:text= "${patient.getLastName()}"></p>
+                <p th:text= "${patient.getDob()}"></p>
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+</div>
+
+
+
+
+
+<script type="text/javascript" src="webjars/bootstrap/4.1.2/js/bootstrap.min.js"></script>
+
+
+
+</body>
+
+</html>

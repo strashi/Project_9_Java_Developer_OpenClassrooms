@@ -12,22 +12,27 @@
 
     <h1>Application Mediscreen</h1>
 
-    <div class="row">
 
-        <div th:each="patient : ${listPatient}" class="col-md-4 my-1">
 
-                <p th:text= "${patient.getFirstName()}"></p>
-            <p th:text= "${patient.getFamily()}"></p>
-            <p th:text= "${patient.getDob()}"></p>
-            <p th:text= "${patient.getSex()}"></p>
-            <p th:text= "${patient.getAddress()}"></p>
-            <p th:text= "${patient.getPhone()}"></p>
+       <form action="#" th:action="@{/patients}"  method="post">
+           <div class="form-group">
+               <label for="lastName" class="col-sm-2 control-label">Searching by lastname</label>
+               <div class="col-sm-12">
+                   <input type="text"  id="lastName" name="lastName" placeholder="lastname" class="col-4">
+                  <!-- <p class="text-danger" th:if="${#fields.hasErrors('account')}" th:errors="*{account}"></p>-->
+               </div>
+           </div>
 
-            </a>
+           <div class="form-group">
+               <div class="col-sm-12">
+                <!--   <a class="btn btn-danger btn-sm" href="/bidList/list">Cancel</a>-->
+                   <input class="btn btn-primary btn-sm" type="submit" value="Search">
+               </div>
+           </div>
 
-        </div>
+       </form>
 
-    </div>
+
 
 
 

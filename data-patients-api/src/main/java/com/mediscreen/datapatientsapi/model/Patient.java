@@ -9,16 +9,14 @@ import java.sql.Date;
 
 @Entity
 @Data
-public class Patient implements Serializable {
+public class Patient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    //@Column(name = "patientId")
     private Long patientId;
 
     private String firstName;
-    private String family;
-    private String given;
+    private String lastName;
 
     @JsonFormat(pattern ="yyyy/MM/dd")
     private Date dob;

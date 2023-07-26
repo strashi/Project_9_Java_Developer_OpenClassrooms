@@ -9,8 +9,7 @@ public class PatientBean {
     private Long patientId;
 
     private String firstName;
-    private String family;
-    private String given;
+    private String lastName;
 
     @JsonFormat(pattern ="yyyy/MM/dd")
     private Date dob;
