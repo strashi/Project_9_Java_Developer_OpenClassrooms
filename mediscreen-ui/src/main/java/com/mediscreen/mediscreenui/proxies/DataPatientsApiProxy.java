@@ -17,7 +17,13 @@ public interface DataPatientsApiProxy {
     @GetMapping("/patient/{patientId}")
     PatientBean getPatient(@PathVariable Long patientId);
 
-   /* @PostMapping("/patient/add")
+ /*   @PostMapping("/patient/add")
     PatientBean addPatient(@RequestParam String family, @RequestParam String given, @RequestParam Date dob, @RequestParam String sex,
                               @RequestParam String address, @RequestParam String phone);*/
+
+    @PostMapping("/patient/add")
+    PatientBean savePatient(PatientBean patient);
+
+   @RequestMapping(value = "/patient/delete", method = RequestMethod.DELETE)
+   void deletePatient(@RequestParam("patientId") Long patientId);
 }

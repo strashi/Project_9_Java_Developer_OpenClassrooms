@@ -31,7 +31,7 @@ public class PatientController {
 
     }
 
-    @PostMapping("/patient/add")
+   /* @PostMapping("/patient/add")
     public Patient addPatient(@RequestParam String lastName,@RequestParam Date dob, @RequestParam String sex,
                               @RequestParam String address, @RequestParam String phone){
         Patient patient = new Patient();
@@ -41,5 +41,16 @@ public class PatientController {
         patient.setAddress(address);
         patient.setPhone(phone);
         return patientsDao.save(patient);
+    }*/
+
+    @PostMapping("/patient/add")
+    public Patient savePatient(@RequestBody Patient patient){
+        return patientsDao.save(patient);
+    }
+
+    @RequestMapping (value = "/patient/delete", method = RequestMethod.DELETE)
+    public void deletePatient(@RequestParam("patientId") Long patientId){
+        Patient patient = patientsDao.findById(patientId).get();
+        patientsDao.delete(patient);
     }
 }

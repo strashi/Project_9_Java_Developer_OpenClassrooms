@@ -42,4 +42,34 @@ public class PatientController {
         model.addAttribute("patientsList", patientsList);
         return "PatientsList";
     }
+
+    @GetMapping("patient/add")
+    public String addPatientForm(PatientBean patient){
+        return "CreatePatient";
+    }
+
+    @PostMapping("/patient/add")
+    public String savePatient(PatientBean patient){
+        dataPatientsApiProxy.savePatient(patient);
+        return "redirect:/";
+    }
+
+    @GetMapping("/patient/manage/{patientId}")
+    public String managePatient(@PathVariable Long patientId, Model model ){
+        PatientBean patient= dataPatientsApiProxy.getPatient(patientId);
+        model.addAttribute("patientBean",patient);
+        return "ManagePatient";
+    }
+    @PostMapping("/patient/manage/{patientId}")
+    public String updatePatient(@PathVariable Long patientId, PatientBean patient,Model model){
+        patient.setPatientId(patientId);
+        dataPatientsApiProxy.savePatient(patient);
+        return "redirect:/patient/{patientId}";
+    }
+
+    @RequestMapping(value = "/patient/delete", method = RequestMethod.DELETE)
+    public String deletePatient(@RequestParam("patientId") Long patientId){
+        dataPatientsApiProxy.deletePatient(patientId);
+        return "redirect:/";
+    }
 }
