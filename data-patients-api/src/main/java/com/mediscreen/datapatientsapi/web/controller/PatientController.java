@@ -48,8 +48,8 @@ public class PatientController {
         return patientsDao.save(patient);
     }
 
-    @RequestMapping (value = "/patient/delete", method = RequestMethod.DELETE)
-    public void deletePatient(@RequestParam("patientId") Long patientId){
+    @DeleteMapping ("/patient/delete")
+    public void deletePatient(@RequestParam Long patientId){
         Patient patient = patientsDao.findById(patientId).get();
         patientsDao.delete(patient);
     }

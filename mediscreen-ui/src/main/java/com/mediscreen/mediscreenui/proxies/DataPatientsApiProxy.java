@@ -24,6 +24,6 @@ public interface DataPatientsApiProxy {
     @PostMapping("/patient/add")
     PatientBean savePatient(PatientBean patient);
 
-   @RequestMapping(value = "/patient/delete", method = RequestMethod.DELETE)
-   void deletePatient(@RequestParam("patientId") Long patientId);
+    @DeleteMapping("/patient/delete")
+    void deletePatient(@RequestParam Long patientId);
 }

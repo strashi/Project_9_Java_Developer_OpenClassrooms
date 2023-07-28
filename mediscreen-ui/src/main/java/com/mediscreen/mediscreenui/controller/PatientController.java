@@ -67,9 +67,11 @@ public class PatientController {
         return "redirect:/patient/{patientId}";
     }
 
-    @RequestMapping(value = "/patient/delete", method = RequestMethod.DELETE)
-    public String deletePatient(@RequestParam("patientId") Long patientId){
+   @GetMapping("/patient/delete")
+   public String deletePatient(@RequestParam Long patientId){
+       System.out.println("patientId "+patientId);
         dataPatientsApiProxy.deletePatient(patientId);
-        return "redirect:/";
-    }
+       return "redirect:/";
+   }
+
 }

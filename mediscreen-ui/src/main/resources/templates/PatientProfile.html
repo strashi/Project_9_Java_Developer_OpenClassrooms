@@ -5,13 +5,12 @@
     <head>
         <title>Mediscreen</title>
         <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.1.2/css/bootstrap.min.css" />
+
     </head>
 
     <body>
         <div class="container">
-
             <h1>Application Mediscreen</h1>
-
             <div class="row">
                 <p th:text= "${patient.getFirstName()}"></p>
                 <p th:text= "${patient.getLastName()}"></p>
@@ -20,9 +19,8 @@
                 <p th:text= "${patient.getPhone()}"></p>
             </div>
 
-            <span class="d-flex p-2 justify-content-center"> <a class="d-flex p-2 justify-content-center btn btn-success " style="width: 150px;" th:href="@{/patient/manage/{patientId}(patientId=${patient.getPatientId()})}">Manage data patient</a></span>
-
         </div>
+        <span class="d-flex p-2 justify-content-center"> <a class="d-flex p-2 justify-content-center btn btn-success " style="width: 250px;" th:href="@{/patient/manage/{patientId}(patientId=${patient.getPatientId()})}">Manage data patient</a></span>
 
         <script type="text/javascript" src="webjars/bootstrap/4.1.2/js/bootstrap.min.js"></script>
 
