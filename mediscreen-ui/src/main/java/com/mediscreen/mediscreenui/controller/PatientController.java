@@ -66,7 +66,7 @@ public class PatientController {
         dataPatientsApiProxy.savePatient(patient);
         return "redirect:/patient/{patientId}";
     }
-    //
+
     @RequestMapping(value = "/patient/delete", method = RequestMethod.DELETE)
     public String deletePatient(@RequestParam("patientId") Long patientId){
         dataPatientsApiProxy.deletePatient(patientId);
