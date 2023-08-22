@@ -4,14 +4,14 @@
 
     <head>
         <title>Mediscreen</title>
-        <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.1.2/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.1.2/css/bootstrap.min.css" />
 
     </head>
 
     <body>
         <div class="container">
             <h1>Application Mediscreen</h1>
-            <div class="row">
+            <div class="column">
                 <p th:text= "${patient.getFirstName()}"></p>
                 <p th:text= "${patient.getLastName()}"></p>
                 <p th:text= "${patient.getDob()}"></p>
