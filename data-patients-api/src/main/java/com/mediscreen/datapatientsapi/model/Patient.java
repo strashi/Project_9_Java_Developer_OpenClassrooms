@@ -7,11 +7,11 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 @Data
-public class Patient {
+public class Patient implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

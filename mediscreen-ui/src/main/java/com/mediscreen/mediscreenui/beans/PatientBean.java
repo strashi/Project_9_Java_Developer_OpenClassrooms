@@ -9,8 +9,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import java.io.Serializable;
-//import java.sql.Date;
 import java.util.Date;
+
 @Data
 public class PatientBean implements Serializable {
     private Long patientId;
@@ -18,7 +18,7 @@ public class PatientBean implements Serializable {
     private String firstName;
     @NotBlank(message = "LastName is mandatory")
     private String lastName;
-    //@JsonFormat(pattern ="yyyy/MM/dd")
+    @JsonFormat(pattern ="yyyy/MM/dd")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @NotNull(message = "dob is mandatory")
     @Past(message = "dob in the past")
