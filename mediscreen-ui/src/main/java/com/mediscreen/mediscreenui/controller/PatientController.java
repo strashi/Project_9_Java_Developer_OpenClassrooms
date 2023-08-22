@@ -5,8 +5,10 @@ import com.mediscreen.mediscreenui.proxies.DataPatientsApiProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -49,9 +51,12 @@ public class PatientController {
     }
 
     @PostMapping("/patient/add")
-    public String savePatient(PatientBean patient){
-        dataPatientsApiProxy.savePatient(patient);
-        return "redirect:/";
+    public String savePatient(@Valid PatientBean patient, BindingResult result){
+        if (!result.hasErrors()){
+            dataPatientsApiProxy.savePatient(patient);
+            return "redirect:/";
+        }
+        return "CreatePatient";
     }
 
     @GetMapping("/patient/manage/{patientId}")

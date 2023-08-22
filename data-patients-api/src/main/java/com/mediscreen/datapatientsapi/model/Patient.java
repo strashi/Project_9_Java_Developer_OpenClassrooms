@@ -3,7 +3,9 @@ package com.mediscreen.datapatientsapi.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.sql.Date;
 
@@ -16,6 +18,7 @@ public class Patient {
     private Long patientId;
 
     private String firstName;
+
     private String lastName;
 
     @JsonFormat(pattern ="yyyy/MM/dd")
