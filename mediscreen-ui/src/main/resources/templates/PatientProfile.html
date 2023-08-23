@@ -21,7 +21,14 @@
 
         </div>
         <span class="d-flex p-2 justify-content-center"> <a class="d-flex p-2 justify-content-center btn btn-success " style="width: 250px;" th:href="@{/patient/manage/{patientId}(patientId=${patient.getPatientId()})}">Manage data patient</a></span>
-
+        <div class="d-flex p-2 justify-content-center">
+        <!--<a class="btn btn-primary btn-sm" th:href="@{/patients}">Backward</a>-->
+            <form action="#" th:action="@{/patients}"  method="post">
+                <input type="hidden"   name="lastName" th:value="${patient.getLastName()}">
+                <input class="btn btn-primary btn-sm" type="submit" value="Backward">
+            </form>
+            <a class="btn btn-primary btn-sm" th:href="@{/}">New search</a>
+        </div>
         <script type="text/javascript" src="webjars/bootstrap/4.1.2/js/bootstrap.min.js"></script>
 
     </body>

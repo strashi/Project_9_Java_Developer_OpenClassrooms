@@ -13,7 +13,7 @@ public class PatientsService {
     @Autowired
     private DataPatientsApiProxy dataPatientsApiProxy;
 
-    public PatientBean getPatient(Long patientId,){
+    public PatientBean getPatient(Long patientId){
         return dataPatientsApiProxy.getPatient(patientId);
     }
 
