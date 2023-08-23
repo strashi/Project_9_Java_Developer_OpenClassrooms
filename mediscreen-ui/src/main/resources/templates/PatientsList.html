@@ -13,16 +13,16 @@
     <h1>Application Mediscreen</h1>
 
     <div class="row">
+        <span th:text="${patientsList.isEmpty()} ? 'No patient found'"></span>
+            <div th:each="patient : ${patientsList}" class="col-md-4 my-1">
+                <a th:href="@{|/patient/${patient.getPatientId()}|}" >
+                    <p th:text= "${patient.getFirstName()}"></p>
+                    <p th:text= "${patient.getLastName()}"></p>
+                    <p th:text= "${patient.getDob()}"></p>
 
-        <div th:each="patient : ${patientsList}" class="col-md-4 my-1">
-            <a th:href="@{|/patient/${patient.getPatientId()}|}" >
-                <p th:text= "${patient.getFirstName()}"></p>
-                <p th:text= "${patient.getLastName()}"></p>
-                <p th:text= "${patient.getDob()}"></p>
+                </a>
 
-            </a>
-
-        </div>
+            </div>
 
     </div>
 

@@ -5,11 +5,10 @@ import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 public class PatientBean implements Serializable {
@@ -20,9 +19,9 @@ public class PatientBean implements Serializable {
     private String lastName;
     @JsonFormat(pattern ="yyyy/MM/dd")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    @NotNull(message = "dob is mandatory")
-    @Past(message = "dob in the past")
-    private Date dob;
+    @NotNull(message = "Date of birthday is mandatory")
+    @Past(message = "Date of birthday must be in the past")
+    private LocalDate dob;
     @NotBlank(message = "Sex is mandatory")
     private String sex;
     @NotBlank(message = "Address is mandatory")

@@ -1,7 +1,8 @@
-package com.mediscreen.mediscreenui.controller;
+package com.mediscreen.mediscreenui.web.controller;
 
 import com.mediscreen.mediscreenui.beans.PatientBean;
 import com.mediscreen.mediscreenui.proxies.DataPatientsApiProxy;
+import com.mediscreen.mediscreenui.service.PatientsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,15 +16,7 @@ import java.util.List;
 public class PatientController {
 
     @Autowired
-    private DataPatientsApiProxy dataPatientsApiProxy;
-
-    /*  @RequestMapping("/")
-    public String listPatient(Model model){
-        List<PatientBean> listPatient =dataPatientsApiProxy.listPatient();
-        model.addAttribute("listPatient",listPatient);
-
-        return "Accueil";
-    }*/
+    private PatientsService patientsService;
 
     @GetMapping("/")
     public String accueil(){
@@ -32,15 +25,15 @@ public class PatientController {
 
     @GetMapping("/patient/{patientId}")
     public String getPatient(@PathVariable Long patientId, Model model){
-        PatientBean patient = dataPatientsApiProxy.getPatient(patientId);
+        PatientBean patient = patientsService.getPatient(patientId);
         model.addAttribute("patient", patient);
         return "PatientProfile";
     }
 
 
-    @RequestMapping("/patients")
+    @GetMapping("/patients")
     public String getPatientsList(@RequestParam String lastName, Model model){
-        List<PatientBean> patientsList = dataPatientsApiProxy.getPatientsList(lastName);
+        List<PatientBean> patientsList = patientsService.getPatientsList(lastName);
         model.addAttribute("patientsList", patientsList);
         return "PatientsList";
     }
@@ -53,7 +46,7 @@ public class PatientController {
     @PostMapping("/patient/add")
     public String savePatient(@Valid PatientBean patient, BindingResult result){
         if (!result.hasErrors()){
-            dataPatientsApiProxy.savePatient(patient);
+            patientsService.savePatient(patient);
             return "redirect:/";
         }
         return "CreatePatient";
@@ -61,21 +54,20 @@ public class PatientController {
 
     @GetMapping("/patient/manage/{patientId}")
     public String managePatient(@PathVariable Long patientId, Model model ){
-        PatientBean patient= dataPatientsApiProxy.getPatient(patientId);
+        PatientBean patient= patientsService.getPatient(patientId);
         model.addAttribute("patientBean",patient);
         return "ManagePatient";
     }
     @PostMapping("/patient/manage/{patientId}")
-    public String updatePatient(@PathVariable Long patientId, PatientBean patient,Model model){
+    public String updatePatient(@PathVariable Long patientId, PatientBean patient){
         patient.setPatientId(patientId);
-        dataPatientsApiProxy.savePatient(patient);
+        patientsService.savePatient(patient);
         return "redirect:/patient/{patientId}";
     }
 
    @GetMapping("/patient/delete")
    public String deletePatient(@RequestParam Long patientId){
-       System.out.println("patientId "+patientId);
-        dataPatientsApiProxy.deletePatient(patientId);
+       patientsService.deletePatient(patientId);
        return "redirect:/";
    }
 
