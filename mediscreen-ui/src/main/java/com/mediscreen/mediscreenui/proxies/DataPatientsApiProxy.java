@@ -11,15 +11,11 @@ import java.util.List;
 public interface DataPatientsApiProxy {
    /* @RequestMapping("/")
     List<PatientBean> listPatient();*/
-    @RequestMapping("/patients")
+    @GetMapping("/patients")
     List<PatientBean> getPatientsList(@RequestParam String lastName);
 
     @GetMapping("/patient/{patientId}")
     PatientBean getPatient(@PathVariable Long patientId);
-
- /*   @PostMapping("/patient/add")
-    PatientBean addPatient(@RequestParam String family, @RequestParam String given, @RequestParam Date dob, @RequestParam String sex,
-                              @RequestParam String address, @RequestParam String phone);*/
 
     @PostMapping("/patient/add")
     PatientBean savePatient(PatientBean patient);

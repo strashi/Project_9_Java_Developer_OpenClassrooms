@@ -31,7 +31,7 @@ public class PatientController {
     }
 
 
-    @RequestMapping("/patients")
+    @PostMapping("/patients")
     public String getPatientsList(@RequestParam String lastName, Model model){
         List<PatientBean> patientsList = patientsService.getPatientsList(lastName);
         model.addAttribute("patientsList", patientsList);

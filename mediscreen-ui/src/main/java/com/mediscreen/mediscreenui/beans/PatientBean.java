@@ -1,7 +1,9 @@
 package com.mediscreen.mediscreenui.beans;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;
@@ -9,9 +11,12 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+
 import java.time.LocalDate;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class PatientBean implements Serializable {
 
     private Long patientId;
@@ -24,8 +29,9 @@ public class PatientBean implements Serializable {
     @NotBlank(message = "LastName is mandatory")
     private String lastName;
 
-    @JsonFormat(pattern ="yyyy/MM/dd")
+
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @JsonFormat(pattern ="yyyy/MM/dd")
     @NotNull(message = "Date of birthday is mandatory")
     @Past(message = "Date of birthday must be in the past")
     private LocalDate dob;

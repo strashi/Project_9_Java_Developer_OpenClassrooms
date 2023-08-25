@@ -13,7 +13,6 @@ public class PatientsController {
     @Autowired
     private PatientsService patientsService;
 
-
     @GetMapping("/patients")
     public List<Patient> getPatientsList(@RequestParam String lastName){
         return patientsService.getPatientList(lastName);
@@ -22,7 +21,6 @@ public class PatientsController {
     @GetMapping("/patient/{patientId}")
     public Patient getPatient(@PathVariable Long patientId){
         return patientsService.getPatient(patientId);
-
     }
 
     @PostMapping("/patient/add")
