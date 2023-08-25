@@ -1,4 +1,4 @@
-package com.mediscreen.mediscreenui.servicetest;
+package com.mediscreen.mediscreenui.serviceTest;
 
 import com.mediscreen.mediscreenui.beans.PatientBean;
 import com.mediscreen.mediscreenui.proxies.DataPatientsApiProxy;
