@@ -51,6 +51,7 @@ public class ServiceTest {
         // THEN
         Assert.assertSame(list, listTest);
     }
+
     @Test
     public void savePatientTest(){
         // GIVEN

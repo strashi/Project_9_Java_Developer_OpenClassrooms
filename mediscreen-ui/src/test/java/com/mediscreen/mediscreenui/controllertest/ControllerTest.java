@@ -59,7 +59,10 @@ public class ControllerTest {
                 .andExpect(status().isOk()).andDo(print())
                 .andExpect(view().name("PatientsList"));
     }
-
+    @Test
+    public void addPatientFormTest() throws Exception {
+        mockMvc.perform(get("/patient/add")).andExpect(status().isOk()).andDo(print());
+    }
     @Test
     public void savePatientTest() throws Exception{
 
