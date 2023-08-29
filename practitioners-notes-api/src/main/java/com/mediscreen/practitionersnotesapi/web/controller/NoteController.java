@@ -18,8 +18,19 @@ public class NoteController {
         return noteRepository.findByPatId(patId);
     }
 
+    @GetMapping("/patHistory/update/{id}")
+    public Note getNote(@PathVariable String id){
+        return noteRepository.findById(id).get();
+    }
+
     @PostMapping("/patHistory/add")
     public Note addNote(@RequestBody Note note){
         return noteRepository.insert(note);
+    }
+
+    @PostMapping("/patHistory/update")
+    public Note updateNote(@RequestBody Note note){
+        return noteRepository.save(note);
+
     }
 }

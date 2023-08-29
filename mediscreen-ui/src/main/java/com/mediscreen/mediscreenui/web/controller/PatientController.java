@@ -47,6 +47,23 @@ public class PatientController {
 
     }
 
+    @GetMapping("/notes/update/{id}")
+    public String getNote(@PathVariable String id, Model model){
+        NoteBean note = practitionersNoteApiProxy.getNote(id);
+        model.addAttribute("note",note);
+        return "ManageNote";
+    }
+
+    @PostMapping("/notes/update/{id}/{patId}")
+    public String updateNote(@PathVariable String id, @RequestParam String notes, @PathVariable long patId){
+        NoteBean note = new NoteBean();
+        note.setId(id);
+        note.setPatId(patId);
+        note.setNotes(notes);
+        practitionersNoteApiProxy.updateNote(note);
+        return "redirect:/patient/{patId}";
+    }
+
 
     @PostMapping("/patients")
     public String getPatientsList(@RequestParam String lastName, Model model){

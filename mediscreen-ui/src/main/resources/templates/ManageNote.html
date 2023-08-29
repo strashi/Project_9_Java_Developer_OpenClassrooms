@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Mediscreen</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.1.2/css/bootstrap.min.css" />
+
+
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Application Mediscreen</h1>
+
+    <form action="#" th:action="@{/notes/update/{id}/{patId}(id=${note.getId()}, patId=${note.getPatId()})}" th:object="${note}" method="post">
+        <div class="form-group">
+            <label for="note" class="col-sm-2 control-label">Note</label>
+            <div class="col-sm-12">
+                <textarea th:field="*{notes}" id="note" rows="10" cols="100"></textarea>
+               <!-- <input type="text" th:field="*{notes}" id="note" placeholder="First name" class="col-4">-->
+                <!-- <p class="text-danger" th:if="${#fields.hasErrors('account')}" th:errors="*{account}"></p>-->
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-12">
+                <!--   <a class="btn btn-danger btn-sm" href="/bidList/list">Cancel</a>-->
+                <input type="hidden"   name="patId" th:value="${note.getPatId()}">
+                <input class="btn btn-primary btn-sm" type="submit" value="Update">
+            </div>
+        </div>
+    </form>
+
+    <a class="btn btn-primary btn-sm" th:href="@{/}">Home page</a>
+
+</div>
+<script type="text/javascript" src="webjars/bootstrap/4.1.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

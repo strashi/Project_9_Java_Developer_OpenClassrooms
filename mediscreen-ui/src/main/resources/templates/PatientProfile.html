@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 
     <head>
         <title>Mediscreen</title>
@@ -25,6 +25,7 @@
                 <div th:each="note : ${noteList}" class="col-md-10 my-1">
 
                     <p th:text= "${note.getNotes()}"></p>
+                    <a th:href="@{|/notes/update/${note.getId()}|}"> Modify </a>
 
 
                 </div>
