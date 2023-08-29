@@ -1,7 +1,9 @@
 package com.mediscreen.mediscreenui.web.controller;
 
+import com.mediscreen.mediscreenui.beans.NoteBean;
 import com.mediscreen.mediscreenui.beans.PatientBean;
 import com.mediscreen.mediscreenui.proxies.DataPatientsApiProxy;
+import com.mediscreen.mediscreenui.proxies.PractitionersNoteApiProxy;
 import com.mediscreen.mediscreenui.service.PatientsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,9 @@ public class PatientController {
     @Autowired
     private PatientsService patientsService;
 
+    @Autowired
+    private PractitionersNoteApiProxy practitionersNoteApiProxy;
+
     @GetMapping("/")
     public String accueil(){
         return "Accueil";
@@ -27,7 +32,19 @@ public class PatientController {
     public String getPatient(@PathVariable Long patientId, Model model){
         PatientBean patient = patientsService.getPatient(patientId);
         model.addAttribute("patient", patient);
+        List<NoteBean> noteList = practitionersNoteApiProxy.getPatientNote(patientId);
+        model.addAttribute("noteList", noteList);
         return "PatientProfile";
+    }
+
+    @PostMapping("/notes/add/{patId}")
+    public String addNote(@RequestParam String note, @PathVariable Long patId){
+        NoteBean noteBean = new NoteBean();
+        noteBean.setNotes(note);
+        noteBean.setPatId(patId);
+        practitionersNoteApiProxy.addNote(noteBean);
+        return "redirect:/patient/{patId}";
+
     }
 
 
