@@ -2,6 +2,7 @@ package com.mediscreen.practitionersnotesapi.web.controller;
 
 import com.mediscreen.practitionersnotesapi.model.Note;
 import com.mediscreen.practitionersnotesapi.repository.NoteRepository;
+import com.mediscreen.practitionersnotesapi.service.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,26 +12,26 @@ import java.util.List;
 public class NoteController {
 
     @Autowired
-    private NoteRepository noteRepository;
+    private NoteService noteService;
 
     @GetMapping("/patHistory/{patId}")
     public List<Note> getPatientNote(@PathVariable Long patId){
-        return noteRepository.findByPatId(patId);
+        return noteService.findByPatId(patId);
     }
 
     @GetMapping("/patHistory/update/{id}")
     public Note getNote(@PathVariable String id){
-        return noteRepository.findById(id).get();
+        return noteService.findById(id);
     }
 
     @PostMapping("/patHistory/add")
     public Note addNote(@RequestBody Note note){
-        return noteRepository.insert(note);
+        return noteService.insert(note);
     }
 
     @PostMapping("/patHistory/update")
     public Note updateNote(@RequestBody Note note){
-        return noteRepository.save(note);
+        return noteService.save(note);
 
     }
 }
