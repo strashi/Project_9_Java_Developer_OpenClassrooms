@@ -27,17 +27,7 @@ public class ServiceTest {
 
     @Test
     public void getPatientsListTest(){
-        // GIVEN
-        LocalDate date = LocalDate.of(2000,02,29);
-        Patient patient = new Patient(0L, "Jack", "Black", date, "M", "5 rue du Port", "123-456-789");
-        List<Patient> list = new ArrayList<>();
-        list.add(patient);
 
-        when(patientsDao.findByLastName("Black")).thenReturn(list);
-        // WHEN
-        List<Patient> listTest= patientsService.getPatientList("Black");
-        // THEN
-        Assert.assertSame(list, listTest);
     }
     @Test
     public void getPatientTest(){

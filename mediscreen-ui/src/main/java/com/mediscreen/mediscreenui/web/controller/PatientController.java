@@ -4,6 +4,7 @@ import com.mediscreen.mediscreenui.beans.NoteBean;
 import com.mediscreen.mediscreenui.beans.PatientBean;
 import com.mediscreen.mediscreenui.proxies.DataPatientsApiProxy;
 import com.mediscreen.mediscreenui.proxies.PractitionersNoteApiProxy;
+import com.mediscreen.mediscreenui.service.NotesService;
 import com.mediscreen.mediscreenui.service.PatientsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +22,7 @@ public class PatientController {
     private PatientsService patientsService;
 
     @Autowired
-    private PractitionersNoteApiProxy practitionersNoteApiProxy;
+    private NotesService notesService;
 
     @GetMapping("/")
     public String accueil(){
@@ -32,24 +33,24 @@ public class PatientController {
     public String getPatient(@PathVariable Long patientId, Model model){
         PatientBean patient = patientsService.getPatient(patientId);
         model.addAttribute("patient", patient);
-        List<NoteBean> noteList = practitionersNoteApiProxy.getPatientNote(patientId);
+        List<NoteBean> noteList = notesService.getPatientNote(patientId);
         model.addAttribute("noteList", noteList);
         return "PatientProfile";
     }
 
     @PostMapping("/notes/add/{patId}")
-    public String addNote(@RequestParam String note, @PathVariable Long patId){
+    public String addNote(@RequestParam String notes, @PathVariable Long patId){
         NoteBean noteBean = new NoteBean();
-        noteBean.setNotes(note);
+        noteBean.setNotes(notes);
         noteBean.setPatId(patId);
-        practitionersNoteApiProxy.addNote(noteBean);
+        notesService.addNote(noteBean);
         return "redirect:/patient/{patId}";
 
     }
 
     @GetMapping("/notes/update/{id}")
     public String getNote(@PathVariable String id, Model model){
-        NoteBean note = practitionersNoteApiProxy.getNote(id);
+        NoteBean note = notesService.getNote(id);
         model.addAttribute("note",note);
         return "ManageNote";
     }
@@ -60,7 +61,7 @@ public class PatientController {
         note.setId(id);
         note.setPatId(patId);
         note.setNotes(notes);
-        practitionersNoteApiProxy.updateNote(note);
+        notesService.updateNote(note);
         return "redirect:/patient/{patId}";
     }
 

@@ -1,6 +1,9 @@
 package com.mediscreen.mediscreenui.controllerTest;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mediscreen.mediscreenui.beans.NoteBean;
 import com.mediscreen.mediscreenui.beans.PatientBean;
+import com.mediscreen.mediscreenui.service.NotesService;
 import com.mediscreen.mediscreenui.service.PatientsService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +34,9 @@ public class ControllerTest {
     @MockBean
     private PatientsService patientsService;
 
+    @MockBean
+    private NotesService notesService;
+
     @Test
     public void accueilTest() throws Exception{
         mockMvc.perform(get("/")).andExpect(status().isOk()).andDo(print());
@@ -42,7 +48,56 @@ public class ControllerTest {
         PatientBean patientBean = new PatientBean(0L, "Jack", "Black", date, "M", "5 rue du Port", "123-456-789");
         when(patientsService.getPatient(0L)).thenReturn(patientBean);
 
+        NoteBean note = new NoteBean();
+        note.setId("f95223d5669g45662");
+        note.setPatId(0L);
+        note.setNotes("là, y a vraiment rien à dire");
+        List<NoteBean> noteList= new ArrayList<>();
+        noteList.add(note);
+        when(notesService.getPatientNote(0l)).thenReturn(noteList);
+
         mockMvc.perform(get("/patient/0")).andExpect(status().isOk()).andDo(print());
+    }
+
+    @Test
+    public void addNoteTest() throws Exception{
+        NoteBean note = new NoteBean();
+        note.setId("f95223d5669g45662");
+        note.setPatId(0L);
+        note.setNotes("là, y a vraiment rien à dire");
+
+        mockMvc.perform(post("/notes/add/0")
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .param("notes","là, y a vraiment rien à dire"))
+                .andExpect(status().isFound()).andDo(print())
+                        .andExpect(view().name("redirect:/patient/{patId}"));
+    }
+
+    @Test
+    public void getNoteTest() throws Exception{
+        NoteBean note = new NoteBean();
+        note.setId("f95223d5669g45662");
+        note.setPatId(0L);
+        note.setNotes("là, y a vraiment rien à dire");
+
+        when(notesService.getNote("f95223d5669g45662")).thenReturn(note);
+
+        mockMvc.perform(get("/notes/update/f95223d5669g45662")).andExpect(status().isOk()).andDo(print());
+    }
+
+    @Test
+    public void updateNoteTest() throws Exception{
+        NoteBean note = new NoteBean();
+        note.setId("f95223d5669g45662");
+        note.setPatId(0L);
+        note.setNotes("là, y a vraiment rien à dire");
+
+        mockMvc.perform(post("/notes/update/f95223d5669g45662/0")
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .param("notes","là, y a vraiment rien à dire"))
+                .andExpect(status().isFound()).andDo(print())
+                .andExpect(view().name("redirect:/patient/{patId}"));
+
     }
 
     @Test

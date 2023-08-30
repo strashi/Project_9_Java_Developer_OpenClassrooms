@@ -18,7 +18,7 @@ import java.util.List;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-public class ServiceTest {
+public class PatientsServiceTest {
 
     @MockBean
     private DataPatientsApiProxy dataPatientsApiProxy;
