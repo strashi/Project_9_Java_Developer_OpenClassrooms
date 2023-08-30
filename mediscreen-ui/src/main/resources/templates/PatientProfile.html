@@ -31,8 +31,8 @@
                 </div>
                 <form th:action="@{/notes/add/{patId}(patId = ${patient.getPatientId()})}" th:object="${noteBean}" method="post">
                     <label for="newNote">New Note</label>
-                    <textarea name="note" id="newNote"></textarea>
-                    <input type="hidden"   name="patId" th:value="${patient.getPatientId()}">
+                    <textarea name="notes" id="newNote"></textarea>
+                    <!--<input type="hidden"   name="patId" th:value="${patient.getPatientId()}">-->
                     <input class="btn btn-primary btn-sm" type="submit" value="Add Note">
                 </form>
 

@@ -4,6 +4,7 @@ import com.mediscreen.datapatientsapi.dao.PatientsDao;
 import com.mediscreen.datapatientsapi.model.Patient;
 import com.mediscreen.datapatientsapi.service.PatientsService;
 import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -38,7 +39,7 @@ public class ServiceTest {
         // WHEN
         Patient patientTest = patientsService.getPatient(0L);
         // THEN
-        Assert.assertSame(patient, patientTest);
+        Assertions.assertSame(patient, patientTest);
     }
     @Test
     public void savePatientTest(){
@@ -50,7 +51,7 @@ public class ServiceTest {
         // WHEN
         Patient patientTest = patientsService.savePatient(patient);
         // THEN
-        Assert.assertSame(patient, patientTest);
+        Assertions.assertSame(patient, patientTest);
     }
 
     @Test
