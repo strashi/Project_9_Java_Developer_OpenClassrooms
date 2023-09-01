@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <title>Mediscreen</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.1.2/css/bootstrap.min.css" />
+
+</head>
+
+<body>
+<div class="container">
+    <h1>Application Mediscreen</h1>
+    <div class="column">
+        <p th:text= "${report.getFirstName()}"></p>
+        <p th:text= "${report.getLastName()}"></p>
+        <p th:text= "${report.getDob()}"></p>
+        <p th:text= "${report.getAge()}"></p>
+        <p th:text= "${report.getSex()}"></p>
+        <p th:text= "${report.getAddress()}"></p>
+        <p th:text= "${report.getPhone()}"></p>
+    </div>
+
+
+
+    <p>Patient diabetes risk :</p>
+
+    <p th:text="${report.getDiagnostic()}"></p>
+</div>
+<div class="d-flex p-2 justify-content-center">
+    <!--<a class="btn btn-primary btn-sm" th:href="@{/patients}">Backward</a>-->
+    <form action="#" th:action="@{/patient/{patientId}(patientId=${report.getPatientId()})}"  method="post">
+        <!--<input type="hidden"   name="lastName" th:value="${report.getLastName()}">-->
+        <input class="btn btn-primary btn-sm" type="submit" value="Backward">
+    </form>
+    <a class="btn btn-primary btn-sm" th:href="@{/}">New search</a>
+</div>
+<script type="text/javascript" src="webjars/bootstrap/4.1.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

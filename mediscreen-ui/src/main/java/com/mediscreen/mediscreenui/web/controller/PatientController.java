@@ -1,9 +1,11 @@
 package com.mediscreen.mediscreenui.web.controller;
 
+import com.mediscreen.mediscreenui.beans.DiabetesReportBean;
 import com.mediscreen.mediscreenui.beans.NoteBean;
 import com.mediscreen.mediscreenui.beans.PatientBean;
 import com.mediscreen.mediscreenui.proxies.DataPatientsApiProxy;
 import com.mediscreen.mediscreenui.proxies.PractitionersNoteApiProxy;
+import com.mediscreen.mediscreenui.service.DiabetesDetectorService;
 import com.mediscreen.mediscreenui.service.NotesService;
 import com.mediscreen.mediscreenui.service.PatientsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,17 +26,22 @@ public class PatientController {
     @Autowired
     private NotesService notesService;
 
+    @Autowired
+    private DiabetesDetectorService diabetesDetectorService;
+
     @GetMapping("/")
     public String accueil(){
         return "Accueil";
     }
 
-    @GetMapping("/patient/{patientId}")
+    @RequestMapping("/patient/{patientId}")
     public String getPatient(@PathVariable Long patientId, Model model){
         PatientBean patient = patientsService.getPatient(patientId);
         model.addAttribute("patient", patient);
         List<NoteBean> noteList = notesService.getPatientNote(patientId);
         model.addAttribute("noteList", noteList);
+        /*DiabetesReportBean report = diabetesDetectorService.diabetesDetector(patientId);
+        model.addAttribute("report", report);*/
         return "PatientProfile";
     }
 
@@ -105,5 +112,15 @@ public class PatientController {
        patientsService.deletePatient(patientId);
        return "redirect:/";
    }
+
+   @GetMapping("/calculateDiabetesRisk/{patientId}")
+   public String calculateDiabetesRisk(@PathVariable long patientId, Model model){
+        DiabetesReportBean report = diabetesDetectorService.diabetesDetector(patientId);
+        model.addAttribute("report", report);
+        return "DiabetesReport";
+
+   }
+
+
 
 }

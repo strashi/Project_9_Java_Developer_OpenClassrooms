@@ -32,6 +32,10 @@ public class NoteController {
     @PostMapping("/patHistory/update")
     public Note updateNote(@RequestBody Note note){
         return noteService.save(note);
+    }
 
+    @GetMapping("/getNotesInString/{patId}")
+    public List<String> getNotesInString(@PathVariable Long patId){
+        return noteService.getNotesInString(patId);
     }
 }

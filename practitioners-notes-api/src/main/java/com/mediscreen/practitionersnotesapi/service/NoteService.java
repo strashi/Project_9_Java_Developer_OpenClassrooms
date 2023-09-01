@@ -29,4 +29,8 @@ public class NoteService {
     public Note save(Note note) {
         return noteRepository.save(note);
     }
+
+    public List<String> getNotesInString(Long patId) {
+        return noteRepository.findNotesByPatId(patId);
+    }
 }
