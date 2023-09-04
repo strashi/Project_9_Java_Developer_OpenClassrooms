@@ -1,6 +1,5 @@
 package com.mediscreen.diabetesdetectorapi.service;
 
-import com.mediscreen.diabetesdetectorapi.beans.NoteBean;
 import com.mediscreen.diabetesdetectorapi.beans.PatientBean;
 import com.mediscreen.diabetesdetectorapi.model.DiabetesReport;
 import com.mediscreen.diabetesdetectorapi.proxies.DataPatientsApiProxy;
@@ -9,10 +8,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -31,92 +28,59 @@ public class DiabetesDetectorService {
 
     public DiabetesReport diabetesDetector(long id) {
         PatientBean patient = dataPatientsApiProxy.getPatient(id);
-        List<NoteBean> noteList = practitionersNoteApiProxy.getPatientNote(id);
         List<String> noteInStringList = practitionersNoteApiProxy.getNotesInString(id);
 
         int patientAge = ageCalculator(patient.getDob());
         String patientSex = patient.getSex();
 
+        int triggerWordNumber = triggerWordCount(noteInStringList);
+
         DiabetesReport report = modelMapper.map(patient, DiabetesReport.class);
         report.setAge(patientAge);
-        report.setDiagnostic(defineDiagnostic(noteInStringList,patientAge,patientSex));
+        report.setDiagnostic(defineDiagnostic(triggerWordNumber,patientAge,patientSex));
 
         return report;
     }
 
-    private String defineDiagnostic(List<String> noteInStringList, int age, String sex){
-        int triggerWordNumber = triggerWordCount(noteInStringList);
+    public String defineDiagnostic(int triggerWordNumber, int age, String sex){
 
-        System.out.println("nombre d'occurence: "+triggerWordNumber);
-        System.out.println(noteInStringList.toString());
-        switch (triggerWordNumber){
+        if ( triggerWordNumber == 0)
+            return "aucun risque (None)";
 
-            case 0:
-                return "aucun risque (None)";
-
-            case 1:
-            case 2:
-                if (age > 30){
+        else{ //triggerWordNumber != 0
+            if ( age >= 30){
+                if (triggerWordNumber == 1)
+                    return "non défini (between None and Borderline)";
+                else if (triggerWordNumber >= 2 && triggerWordNumber <= 5)
                     return  "risque limité (Borderline)";
-
-                }else {
-                    return "aucun risque (None)";
-                }
-
-            case 3:
-                if (age < 30 && sex == "M"){
+                else if (triggerWordNumber >= 6 && triggerWordNumber <= 7)
                     return "danger (In Danger)";
+                else if (triggerWordNumber >=8)
+                    return "apparition précoce (Early onset)";
 
-                }else{
-                    return  "risque limité (Borderline)";
+            }else{ //age < 30
 
-                }
-
-            case 4:
-                if (age < 30){
+                if (sex == "M"){
+                   if (triggerWordNumber >= 1 && triggerWordNumber <= 2)
+                       return "non défini (between None and In Danger)";
+                    else if (triggerWordNumber >= 3 && triggerWordNumber <= 4)
                         return "danger (In Danger)";
-                }else{
-                    return  "risque limité (Borderline)";
-
+                    else if (triggerWordNumber >=5)
+                        return "apparition précoce (Early onset)";
+                }else{ //sex == "F"
+                    if (triggerWordNumber >= 1 && triggerWordNumber <= 3)
+                        return "non défini (between None and In Danger)";
+                    else if (triggerWordNumber >= 4 && triggerWordNumber <= 6)
+                        return "danger (In Danger)";
+                    else if (triggerWordNumber >=7)
+                        return "apparition précoce (Early onset)";
                 }
-
-            case 5:
-                if (age < 30 && sex == "M"){
-                    return "apparition précoce (Early onset";
-
-                }else{
-                    return  "risque limité (Borderline)";
-
-                }
-
-            case 6:
-                return "danger (In Danger)";
-
-            case 7:
-                if (age < 30 && sex == "F"){
-                    return "apparition précoce (Early onset";
-
-                }else{
-                    return "danger (In Danger)";
-
-                }
-
-            case 8:
-                return "apparition précoce (Early onset";
-
-            default:
-                return "apparition précoce (Early onset";
-
+            }
         }
+        return null;
     }
 
     private int triggerWordCount(List<String> noteInStringList){
-
-       /* String text = "blaHemogLobinea1c blaghemoglobinea1c";
-        String text1 = "Microalbumine";
-        List<String> stringList = new ArrayList<>();
-        stringList.add(text);
-        stringList.add(text1);*/
         String[] regTab = {"(?i)h[éeè]moglobine[ ]*A1C",
                 "(?i)microalbumine",
                 "(?i)taille",
@@ -136,19 +100,10 @@ public class DiabetesDetectorService {
                 triggerWordCount = triggerWordCount + occur;
             }
         }
-
         return triggerWordCount;
-
-
     }
 
-    /**
-     * Renvoie le nombre d'occurrences du pattern spécifié dans la chaine de caractères spécifiée
-     * @param text chaine de caractères initiale
-     * @param regex expression régulière dont le nombre d'occurrences doit etre compté
-     * @return le nombre d'occurrences du pattern spécifié dans la chaine de caractères spécifiée
-     */
-    public static int regexOccur(String text, String regex) {
+    public int regexOccur(String text, String regex) {
         Matcher matcher = Pattern.compile(regex).matcher(text);
         int occur = 0;
         while(matcher.find()) {
@@ -156,9 +111,6 @@ public class DiabetesDetectorService {
         }
         return occur;
     }
-
-
-
     private int ageCalculator(LocalDate dob){
         LocalDate now = LocalDate.now();
         Period period = Period.between(dob, now);

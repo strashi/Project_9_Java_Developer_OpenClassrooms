@@ -96,6 +96,7 @@
                 <configuration>
                     <excludes>
                         <exclude>com/mediscreen/diabetesdetectorapi/beans/*</exclude>
+                        <exclude>com/mediscreen/diabetesdetectorapi/model/*</exclude>
                     </excludes>
                 </configuration>
                 <executions>
