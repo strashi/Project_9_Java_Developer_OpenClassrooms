@@ -1,4 +1,4 @@
-package com.mediscreen.mediscreenui.web.controller;
+package com.mediscreen.mediscreenui.controller;
 
 import com.mediscreen.mediscreenui.beans.DiabetesReportBean;
 import com.mediscreen.mediscreenui.beans.NoteBean;
@@ -113,7 +113,7 @@ public class PatientController {
        return "redirect:/";
    }
 
-   @GetMapping("/calculateDiabetesRisk/{patientId}")
+   @RequestMapping("/calculateDiabetesRisk/{patientId}")
    public String calculateDiabetesRisk(@PathVariable long patientId, Model model){
         DiabetesReportBean report = diabetesDetectorService.diabetesDetector(patientId);
         model.addAttribute("report", report);

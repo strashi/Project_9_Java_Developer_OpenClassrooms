@@ -27,7 +27,7 @@ public class Patient implements Serializable{
 
     private String lastName;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    @JsonFormat(pattern ="yyyy/MM/dd")
+    @JsonFormat(pattern ="yyyy-MM-dd")
     private LocalDate dob;
     private String sex;
     private String address;

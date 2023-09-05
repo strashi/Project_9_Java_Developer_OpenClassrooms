@@ -1,4 +1,4 @@
-package com.mediscreen.practitionersnotesapi.web.controller;
+package com.mediscreen.practitionersnotesapi.controller;
 
 import com.mediscreen.practitionersnotesapi.model.Note;
 import com.mediscreen.practitionersnotesapi.repository.NoteRepository;

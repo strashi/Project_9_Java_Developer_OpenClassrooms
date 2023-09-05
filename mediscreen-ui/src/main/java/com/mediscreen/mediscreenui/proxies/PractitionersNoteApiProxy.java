@@ -21,4 +21,7 @@ public interface PractitionersNoteApiProxy {
     @PostMapping("/patHistory/update")
     NoteBean updateNote(@RequestBody NoteBean note);
 
+    @GetMapping("/getNotesInString/{patId}")
+    public List<String> getNotesInString(@PathVariable Long patId);
+
 }

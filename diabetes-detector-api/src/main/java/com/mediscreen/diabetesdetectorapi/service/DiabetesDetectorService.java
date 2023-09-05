@@ -7,6 +7,7 @@ import com.mediscreen.diabetesdetectorapi.proxies.PractitionersNoteApiProxy;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -26,14 +27,12 @@ public class DiabetesDetectorService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public DiabetesReport diabetesDetector(long id) {
-        PatientBean patient = dataPatientsApiProxy.getPatient(id);
-        List<String> noteInStringList = practitionersNoteApiProxy.getNotesInString(id);
+    public DiabetesReport diabetesDetector(long id, PatientBean patient, List<String> noteList) {
 
         int patientAge = ageCalculator(patient.getDob());
         String patientSex = patient.getSex();
 
-        int triggerWordNumber = triggerWordCount(noteInStringList);
+        int triggerWordNumber = triggerWordCount(noteList);
 
         DiabetesReport report = modelMapper.map(patient, DiabetesReport.class);
         report.setAge(patientAge);
@@ -42,7 +41,7 @@ public class DiabetesDetectorService {
         return report;
     }
 
-    public String defineDiagnostic(int triggerWordNumber, int age, String sex){
+    private String defineDiagnostic(int triggerWordNumber, int age, String sex){
 
         if ( triggerWordNumber == 0)
             return "aucun risque (None)";
@@ -60,7 +59,7 @@ public class DiabetesDetectorService {
 
             }else{ //age < 30
 
-                if (sex == "M"){
+                if (sex.equals("M")){
                    if (triggerWordNumber >= 1 && triggerWordNumber <= 2)
                        return "non défini (between None and In Danger)";
                     else if (triggerWordNumber >= 3 && triggerWordNumber <= 4)

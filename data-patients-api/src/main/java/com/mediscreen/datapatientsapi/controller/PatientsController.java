@@ -1,4 +1,4 @@
-package com.mediscreen.datapatientsapi.web.controller;
+package com.mediscreen.datapatientsapi.controller;
 
 import com.mediscreen.datapatientsapi.model.Patient;
 import com.mediscreen.datapatientsapi.service.PatientsService;

@@ -31,7 +31,7 @@ public class PatientBean implements Serializable {
 
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    @JsonFormat(pattern ="yyyy/MM/dd")
+    @JsonFormat(pattern ="yyyy-MM-dd")
     @NotNull(message = "Date of birthday is mandatory")
     @Past(message = "Date of birthday must be in the past")
     private LocalDate dob;

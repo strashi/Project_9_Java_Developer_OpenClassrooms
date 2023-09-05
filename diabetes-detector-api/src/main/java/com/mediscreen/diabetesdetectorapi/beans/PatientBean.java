@@ -6,11 +6,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PatientBean {
+public class PatientBean implements Serializable {
     private Long patientId;
 
     private String firstName;
@@ -18,7 +19,7 @@ public class PatientBean {
     private String lastName;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    @JsonFormat(pattern ="yyyy/MM/dd")
+    @JsonFormat(pattern ="yyyy-MM-dd")
     private LocalDate dob;
 
     private String sex;
