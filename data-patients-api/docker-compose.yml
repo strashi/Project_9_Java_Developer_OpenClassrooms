@@ -1,0 +1,18 @@
+version: "3"
+services:
+  db:
+    image: mysql:8.0
+    volumes:
+      - db_data:/var/lib/mysql
+
+
+  data-patients-api:
+    depends_on:
+      - db
+    image: datapatientsapi
+
+
+
+
+volumes:
+  db_data: {}
