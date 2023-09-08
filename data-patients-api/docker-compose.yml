@@ -2,15 +2,16 @@ version: "3"
 services:
   db:
     image: mysql:8.0
+    container_name: db
     volumes:
       - db_data:/var/lib/mysql
+    restart: always
     ports:
       - "3307:3306"
     environment:
       MYSQL_ROOT_PASSWORD: rootroot
-      MYSQL_DATABASE: mediscreen
+      MYSQL_DATABASE: mediscreenDB
       MYSQL_USER: root
-      MYSQL_PASSWORD: rootroot
 
   data-patients-api:
     depends_on:
@@ -21,13 +22,15 @@ services:
 
 
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/mediscreen
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/mediscreenDB
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: rootroot
-     # DATAPATIENTSAPI_DB_HOST: db:3306
+      # DATAPATIENTSAPI_DB_HOST: db:3306
       #DATAPATIENTSAPI_DB_USER: root
       #DATAPATIENTSAPI_DB_PASSWORD: rootroot
       #DATAPATIENTSAPI_DB_NAME: mediscreen
+
+
 
 volumes:
   db_data: {}

@@ -1,5 +1,5 @@
-CREATE SCHEMA IF NOT EXISTS `mediscreen` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
-USE `mediscreen` ;
+CREATE DATABASE IF NOT EXISTS `mediscreenDB` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+USE `mediscreenDB` ;
 
 DROP TABLE IF EXISTS patient ;
 
