@@ -1,0 +1,22 @@
+version: "3"
+services:
+  mongo:
+    image: mongo
+    container_name: mongo
+    volumes:
+      - mongo_data:/var/lib/mongo
+    restart: always
+    ports:
+      - "27016:27017"
+
+  practitioners-notes-api:
+    depends_on:
+      - mongo
+    image: practitionersnotesapi
+    ports:
+      - "8082:8082"
+    environment:
+      SPRING_DATASOURCE_URL: mongodb://mongo:27017/mediscreenDB
+
+volumes:
+  mongo_data: {}

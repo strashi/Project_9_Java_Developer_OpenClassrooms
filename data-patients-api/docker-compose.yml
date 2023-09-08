@@ -19,18 +19,10 @@ services:
     image: datapatientsapi
     ports:
       - "8081:8081"
-
-
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/mediscreenDB
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: rootroot
-      # DATAPATIENTSAPI_DB_HOST: db:3306
-      #DATAPATIENTSAPI_DB_USER: root
-      #DATAPATIENTSAPI_DB_PASSWORD: rootroot
-      #DATAPATIENTSAPI_DB_NAME: mediscreen
-
-
 
 volumes:
   db_data: {}
