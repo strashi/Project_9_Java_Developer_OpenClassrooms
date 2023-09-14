@@ -39,14 +39,6 @@
             </div>
             <a class="btn btn-primary btn-sm" th:href="@{/calculateDiabetesRisk/{patientId}(patientId=${patient.getPatientId()})}">Calculate diabetes risk</a>
 
-          <!--  <form action="#" th:action="@{/calculateDiabetesRisk/{patientId}(patientId = ${patient.getPatientId()})}"  method="post">
-                <input type="hidden"   name="patientId" th:value="${patient.getPatientId()}">
-                <input class="btn btn-primary btn-sm" type="submit" value="Calculate diabetes risk">
-            </form>-->
-
-         <!--   <p>Patient diabetes risk :</p>
-            <span th:text="${report == null} ? 'No report'"></span>
-            <p th:text="${report.getDiagnostic()}"></p>-->
         </div>
         <span class="d-flex p-2 justify-content-center"> <a class="d-flex p-2 justify-content-center btn btn-success " style="width: 250px;" th:href="@{/patient/manage/{patientId}(patientId=${patient.getPatientId()})}">Manage data patient</a></span>
         <div class="d-flex p-2 justify-content-center">

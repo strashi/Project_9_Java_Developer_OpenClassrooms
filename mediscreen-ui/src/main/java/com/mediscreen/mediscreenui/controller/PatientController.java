@@ -40,8 +40,7 @@ public class PatientController {
         model.addAttribute("patient", patient);
         List<NoteBean> noteList = notesService.getPatientNote(patientId);
         model.addAttribute("noteList", noteList);
-        /*DiabetesReportBean report = diabetesDetectorService.diabetesDetector(patientId);
-        model.addAttribute("report", report);*/
+
         return "PatientProfile";
     }
 
