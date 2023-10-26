@@ -15,11 +15,12 @@ Skills tested :
 # Mediscreen
 
 Project realized with :
-- SpringBoot 2.0.4
-- SpringBoot Security
-- MySQL 8.0.35
+- SpringBoot 2.7.14
 - Java 8
-- Bootstrap v4.3.1
+- MongoDB 7.0.2
+- MySQL 8.0.35
+- Docker and Docker-compose
+- Bootstrap v4.1.2
 
 Poseidon is an Rest Api who manages and displays data .
 
@@ -27,7 +28,7 @@ Poseidon is an Rest Api who manages and displays data .
 
 
 
-Test reports
+##Test reports
 
 ![Screenshot-1](https://github.com/strashi/mediscreen/assets/94161747/917712ca-bee3-4eb9-a0f1-af638c354a8a)
 
@@ -35,7 +36,7 @@ Test reports
 
 ![Screenshot-3](https://github.com/strashi/mediscreen/assets/94161747/8ffacae8-ae8f-4243-bd35-7056fabc4f85)
 
-Dockerfiles:
+##Dockerfiles:
 
 for data-patients-api
 
