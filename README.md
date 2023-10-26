@@ -26,7 +26,6 @@ Mediscreen manages data from SQL and NoSql databases and then puts into practice
 
 
 
-
 ## Test reports
 
 ![Screenshot-1](https://github.com/strashi/mediscreen/assets/94161747/917712ca-bee3-4eb9-a0f1-af638c354a8a)
