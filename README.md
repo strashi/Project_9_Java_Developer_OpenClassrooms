@@ -1,4 +1,31 @@
-# mediscreen
+# Back-end Developer : Java
+
+## Project 9 :
+
+## " Develop a microservices solution for your customer "
+
+Skills tested :
+- Using NoSQL databases
+- Create a microservice for an application
+- Implement an agile methodology to manage your code project
+
+![image](https://github.com/strashi/mediscreen/assets/94161747/ed2aa719-00f1-475f-8e53-46c57862fb7e)
+
+
+# Mediscreen
+
+Project realized with :
+- SpringBoot 2.0.4
+- SpringBoot Security
+- MySQL 8.0.35
+- Java 8
+- Bootstrap v4.3.1
+
+Poseidon is an Rest Api who manages and displays data .
+
+
+
+
 
 Test reports
 
